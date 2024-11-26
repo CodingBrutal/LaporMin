@@ -17,21 +17,21 @@
                     <div class="text-start">
                         <label for="nama" class="form-label mb-0" style="font-size: 12px; font-weight: 600;">Nama Lengkap</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control fw-bold border-2 border-dark" id="nama" required>
+                            <input type="text" class="form-control border-2 border-dark" id="nama" required>
                         </div>
                     </div>
 
                     <div class="text-start">
                         <label for="lokasi" class="form-label mb-0" style="font-size: 12px; font-weight: 600;">Lokasi</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control fw-bold border-2 border-dark" id="lokasi" required>
+                            <input type="text" class="form-control border-2 border-dark" id="lokasi" required>
                         </div>
                     </div>
 
                     <div class="text-start">
-                        <label for="jenisFasilitas" class="form-label mb-0" style="font-size: 12px; font-weight: 600;">Email</label>
+                        <label for="jenisFasilitas" class="form-label mb-0" style="font-size: 12px; font-weight: 600;">Jenis Fasilitas</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control fw-bold border-2 border-dark" id="jenisFasilitas" required>
+                            <input type="text" class="form-control border-2 border-dark" id="jenisFasilitas" required>
                         </div>
                     </div>
 
