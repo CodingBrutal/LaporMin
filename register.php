@@ -1,3 +1,40 @@
+<?php
+// Start session and include database configuration
+session_start();
+require_once('config/database.php');
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $email = $_POST['email'];
+    $nama = $_POST['nama'];
+    $password = $_POST['password'];
+    
+    // Check if the email already exists
+    $query = "SELECT * FROM user WHERE email = ? LIMIT 1";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $error = "Email already registered.";
+    } else {
+        // If the email is unique, insert the new user into the database
+        $query = "INSERT INTO user (email, nama, password) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param('sss', $email, $nama, $password); // Store the plain password for now (ideally, you should hash it)
+        if ($stmt->execute()) {
+            // Registration success, redirect to login page
+            header("Location: login.php");
+            exit;
+        } else {
+            $error = "Registration failed. Please try again.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +51,14 @@
             <div class="card-body">
                 <h5 class="card-title text-center mb-3 fs-1" style="font-weight: 700; color: #03254C;">Register</h5>
 
-                <form action="../../registrasi.php" method="POST">
+                <!-- Display error message if there's any -->
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger">
+                        <?= $error ?>
+                    </div>
+                <?php endif; ?>
+
+                <form action="register.php" method="POST">
                     <!-- Email Input -->
                     <div class="mail">
                         <label for="email" class="form-label mb-0" style="font-size: 12px; font-weight: 600;">Email</label>
